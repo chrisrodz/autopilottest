@@ -24,7 +24,7 @@ def hello_monkey():
       }
     """ % email
 
-    r = requests.post('https://api2.autopilothq.com/v1/trigger/0001/contact', data=data, headers=headers)
+    r = requests.post('https://api2.autopilothq.com/v1/trigger/0002/contact', data=data, headers=headers)
     print email
     print r.json()
     resp = twilio.twiml.Response()
