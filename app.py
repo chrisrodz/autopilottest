@@ -14,21 +14,26 @@ headers = {
 def hello_monkey():
     """Respond to incoming calls with a simple text message."""
 
-    email = request.form['Body']
+    data = request.form['Body'].split(' ')
+    firstname = data[0]
+    lastname = data[1]
+    email = data[2]
 
     data = """
       {
         "contact": {
-          "Email": "%s"
+          "Email": "%s",
+          "FirstName": "%s",
+          "LastName": "%s"
         }
       }
-    """ % email
+    """ % (firstname, lastname, email)
 
     r = requests.post('https://api2.autopilothq.com/v1/trigger/0002/contact', data=data, headers=headers)
     print email
     print r.json()
     resp = twilio.twiml.Response()
-    resp.message("Thanks for sending your email address. We should send you an email shortly")
+    resp.message("Thanks for sending your contact information. We should send you an email shortly")
     return str(resp)
 
 if __name__ == "__main__":
