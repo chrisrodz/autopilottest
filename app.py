@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 
 headers = {
-  'autopilotapikey': '9e19dcb628374f429b6d48f22466acac',
+  'autopilotapikey': 'YOUR API KEY',
   'Content-Type': 'application/json'
 }
 
@@ -29,7 +29,10 @@ def hello_monkey():
       }
     """ % (firstname, lastname, email)
 
-    r = requests.post('https://api2.autopilothq.com/v1/trigger/0002/contact', data=data, headers=headers)
+    journey_id = "YOUR JOURNEY ID"
+    url = "https://api2.autopilothq.com/v1/trigger/%s/contact" % journey_id
+
+    r = requests.post(url, data=data, headers=headers)
     print email
     print r.json()
     resp = twilio.twiml.Response()
